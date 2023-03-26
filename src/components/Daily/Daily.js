@@ -17,7 +17,6 @@ function Daily() {
 		sunset = moment(daily.sys.sunset * 1000).format("HH:mm a");
 		sunrise = moment(daily.sys.sunrise * 1000).format("HH:mm a");
 	}
-	console.log(daily);
 
 	return (
 		<div className="daily">
@@ -27,7 +26,8 @@ function Daily() {
 						<p>
 							{daily.name}, {daily.sys.country}
 						</p>
-						<img src="/icons/clear-day.svg" alt="" />
+
+						<img src={`https://openweathermap.org/img/wn/${daily.weather[0].icon}@2x.png`} alt="" />
 					</div>
 					<div className="temp">
 						<p>{Math.round(daily.main.temp)}°C</p>
@@ -39,27 +39,27 @@ function Daily() {
 					</div>
 					<div className="parameters">
 						<div className="item">
-							<img src="/parameter-icons/sunrise.png" alt="" />
+							<img src="/icons/sunrise.svg" alt="" />
 							<p>{sunrise}</p>
 						</div>
 						<div className="item">
-							<img src="/parameter-icons/sunset.png" alt="" />
+							<img src="/icons/sunset.svg" alt="" />
 							<p>{sunset}</p>
 						</div>
 						<div className="item">
-							<img src="/parameter-icons/pressure.png" alt="" />
+							<img src="/icons/barometer.svg" alt="" />
 							<p>{daily.main.pressure} hPa</p>
 						</div>
 						<div className="item">
-							<img src="/parameter-icons/humidity.png" alt="" />
+							<img src="/icons/humidity.svg" alt="" />
 							<p>{daily.main.humidity}%</p>
 						</div>
 						<div className="item">
-							<img src="/parameter-icons/wind.png" alt="" />
+							<img src="/icons/wind.svg" alt="" />
 							<p>{daily.wind.speed} m/s</p>
 						</div>
 						<div className="item">
-							<img src="/parameter-icons/clouds.png" alt="" />
+							<img src="/icons/cloudy.svg" alt="" />
 							<p>{daily.clouds.all}%</p>
 						</div>
 					</div>

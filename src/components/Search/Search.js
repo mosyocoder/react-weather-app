@@ -4,7 +4,7 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AsyncPaginate } from "react-select-async-paginate";
-import { getWeatherCity } from "../../redux/WeatherSlice";
+import { getForecastHourly, getWeatherCity } from "../../redux/WeatherSlice";
 
 function Search() {
 	const dispatch = useDispatch();
@@ -13,6 +13,7 @@ function Search() {
 		value: "39.766193 30.526714",
 	};
 	dispatch(getWeatherCity(defaultCity));
+	dispatch(getForecastHourly(defaultCity));
 	const option = {
 		method: "GET",
 		url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",

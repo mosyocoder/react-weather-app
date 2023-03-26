@@ -1,7 +1,7 @@
 import "./App.css";
 import Daily from "./components/Daily/Daily";
 import Footer from "./components/Footer/Footer";
-import Forecast from "./components/Forecast/Forecast";
+import ForecastHourly from "./components/Forecast/ForecastHourly";
 import Search from "./components/Search/Search";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 				<Footer />
 			</div>
 			<div className="content">
-				<div className="forecastHourly">hourly</div>
+				<ForecastHourly />
 				<div className="forecastWeekly">weekly</div>
 			</div>
 		</div>

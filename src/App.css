@@ -5,6 +5,11 @@
     --modeBg: rgba(0, 0, 0, .12);
     --footerHover: rgba(0, 0, 0, .4);
     --fontColor: black;
+    --fontColorDegree: rgba(255, 255, 255, 0.9);
+    --scrollBg:rgb(187, 187, 187);
+    --searchBg: #fff;
+    --boxBg:#fff;
+    --border:black;
 }
 :root[data-theme="dark"]{
     --bodyBg:linear-gradient(to right, #232526, #414345);
@@ -13,7 +18,50 @@
     --modeBg: rgba(255, 255, 255, .3);
     --footerHover: rgba(255, 255, 255, .4);
     --fontColor: white;
+    --fontColorDegree: rgba(255, 255, 255, 0.5);
+    --scrollBg:rgb(88, 88, 88);
+    --searchBg:#000;
+    --boxBg:#000;
+    --border:white;
 }
+
+@media screen and (max-width: 900px) {
+    .left{
+        min-width: 90%;
+        margin: 10px auto 0 auto!important;
+        padding-bottom: 10px;
+    }
+    .container{
+        flex-direction: column;
+        position: relative;
+    }
+    .footer{
+        min-width: 90%;
+        max-width: 90%;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 15px;
+    }
+    .content{
+        min-width: 90%;
+        margin: 15px auto!important;
+    }
+    .forecastHourly{
+        min-height: 200px;
+    }
+    .forecastHourly::-webkit-scrollbar{
+        opacity: 0;
+        visibility: hidden!important;
+    }
+    .forecastHourly::-webkit-scrollbar-thumb{
+        opacity: 0;
+        visibility: hidden;
+    }
+    .forecastWeekly{
+        min-height: 200px;
+    }
+    
+  }
 
 body{
     background: var(--bodyBg);
@@ -23,7 +71,7 @@ body{
 .container {
     max-width: 1300px;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
     display: flex;
 }
 
@@ -185,4 +233,45 @@ body{
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
+}
+
+
+.forecastHourly{
+    display: flex;
+    width: 95%;
+    margin: 15px auto 0 auto;
+    overflow: auto;
+    color:var(--fontColor);
+    background-color: var(--cardBg);
+    border-radius: 15px;
+}
+
+.forecastHourly::-webkit-scrollbar{
+    height:.6rem;
+    background: var(--scrollBg);
+    opacity: 1;
+    border-radius: .4rem;
+    visibility: visible;
+}
+
+.forecastHourly::-webkit-scrollbar-thumb{
+    background: var(--modeBg);
+    border-radius: .4rem;
+    height:.8rem;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card > span{
+    display: flex;
+}
+
+.card > span > p:last-child{
+    margin-left: 5px;
+    color: var(--fontColorDegree);
 }

@@ -7,7 +7,6 @@ import { darkSwitch } from "../../redux/WeatherSlice";
 function Footer() {
 	const dispatch = useDispatch();
 	const theme = useSelector((state) => state.weather.darkmode);
-	console.log(theme);
 	const openUrl = (link) => {
 		switch (link) {
 			case "twitter":
