@@ -1,10 +1,18 @@
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AsyncPaginate } from "react-select-async-paginate";
-
-import "./style.css";
+import { getWeatherCity } from "../../redux/WeatherSlice";
 
 function Search() {
+	const dispatch = useDispatch();
+	const theme = useSelector((state) => state.weather.darkmode);
+	const defaultCity = {
+		value: "39.766193 30.526714",
+	};
+	dispatch(getWeatherCity(defaultCity));
 	const option = {
 		method: "GET",
 		url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
@@ -31,20 +39,26 @@ function Search() {
 	};
 
 	const onChangeHandler = (value) => {
-		console.log(value);
+		console.log(value.value);
+		dispatch(getWeatherCity(value));
+	};
+
+	const handleClick = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (pos) {
+				const city = {
+					value: pos.coords.latitude + " " + pos.coords.longitude,
+				};
+				dispatch(getWeatherCity(city));
+			});
+		}
 	};
 
 	return (
 		<div className="search">
 			<div className="searchInput">
 				<AsyncPaginate placeholder="Search for city" debounceTimeout={600} onChange={onChangeHandler} loadOptions={loadOptions} />
-			</div>
-			<div className="dayNightToggle">
-				<input type="checkbox" id="toggle" className="toggle--checkbox" />
-				<label htmlFor="toggle" className="toggle--label">
-					<span className="toggle--label-background"></span>
-				</label>
-				<div className="background"></div>
+				<FontAwesomeIcon icon={faLocationDot} size="2x" color={theme ? "white" : ""} bounce onClick={handleClick} />
 			</div>
 		</div>
 	);
