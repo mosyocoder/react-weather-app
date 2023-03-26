@@ -15,6 +15,19 @@ export const getForecastHourly = createAsyncThunk("weather/getForecastHourly", a
 	return hourly.data;
 });
 
+export const getForecastDaily = createAsyncThunk("weather/getForecastDaily", async (city) => {
+	const val = city.value.split(" ");
+
+	const daily = await axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${val[0]}&lon=${val[1]}&units=metric&appid=25c5dc04b42ce8825f70e8bb3dc11c29`);
+	const arr = [];
+	daily.data.list.forEach((item) => {
+		if (item.dt_txt.slice(11, 13) === "12") {
+			arr.push(item);
+		}
+	});
+	return arr;
+});
+
 export const WeatherSlice = createSlice({
 	name: "weather",
 	initialState: {
@@ -57,6 +70,16 @@ export const WeatherSlice = createSlice({
 		},
 		[getForecastHourly.rejected]: (state) => {
 			state.forecastHourly.status = "rejected";
+		},
+		[getForecastDaily.pending]: (state) => {
+			state.forecastDaily.status = "pending";
+		},
+		[getForecastDaily.fulfilled]: (state, action) => {
+			state.forecastDaily.data = action.payload;
+			state.forecastDaily.status = "success";
+		},
+		[getForecastDaily.rejected]: (state) => {
+			state.forecastDaily.status = "rejected";
 		},
 	},
 });
