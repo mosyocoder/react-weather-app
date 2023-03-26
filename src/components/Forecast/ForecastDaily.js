@@ -5,12 +5,8 @@ function ForecastDaily() {
 	const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 	const data = useSelector((state) => state.weather.forecastDaily.data);
 	const status = useSelector((state) => state.weather.forecastDaily.status);
-	console.log(data);
-	let date = "";
 	const arr = [];
 	if (status === "success") {
-		date = new Date((data[0].dt - 10800) * 1000).getDay() - 1;
-
 		data.forEach((item) => {
 			let desc = "";
 			item.weather[0].description.split(" ").forEach((word, key) => {
