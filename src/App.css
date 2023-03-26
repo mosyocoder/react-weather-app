@@ -267,6 +267,10 @@ body{
     flex-direction: column;
 }
 
+.card > img {
+    width: 150px;
+}
+
 .card > span{
     display: flex;
 }

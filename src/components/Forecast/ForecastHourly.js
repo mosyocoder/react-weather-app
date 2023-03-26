@@ -15,7 +15,7 @@ function ForecastHourly() {
 
 	return (
 		<div className="forecastHourly">
-			{data &&
+			{status === "success" &&
 				data.list.map((item, key) => (
 					<div className="card" key={key}>
 						<p>{item.dt_txt.slice(11, 16)}</p>
