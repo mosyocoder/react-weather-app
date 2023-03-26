@@ -4,16 +4,22 @@ import { useSelector } from "react-redux";
 function ForecastHourly() {
 	const data = useSelector((state) => state.weather.forecastHourly.data);
 	const status = useSelector((state) => state.weather.forecastHourly.status);
-	let arr = [];
-	if (status === "success") {
-		data.list.map((item) => {
-			let w = "";
-			item.weather[0].description.split(" ").map((word) => (w += word[0].toUpperCase() + word.slice(1) + " "));
-			arr.push(w);
+    let arr = [];
+    if (status === "success") {
+		data.list.forEach((item) => {
+			let desc = "";
+			item.weather[0].description.split(" ").forEach((word, key) => {
+				if (key === 0) {
+					desc += word[0].toUpperCase() + word.slice(1) + " ";
+				} else {
+					desc += word[0].toUpperCase() + word.slice(1);
+				}
+			});
+			arr.push(desc);
 		});
-	}
+    }
 
-	return (
+    return (
 		<div className="forecastHourly">
 			{status === "success" &&
 				data.list.map((item, key) => (
@@ -29,7 +35,7 @@ function ForecastHourly() {
 					</div>
 				))}
 		</div>
-	);
+    );
 }
 
 export default ForecastHourly;
